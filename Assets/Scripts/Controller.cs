@@ -96,7 +96,7 @@ public class Controller : MonoBehaviour
             // Crouch movement
             float height = m_CharacterController.height;
             float crouchedHeight = oldHeight / 2;
-            if ((Input.GetKey(KeyCode.C)/* || Input.GetKey(KeyCode.LeftControl)*/) && !running)
+            if (Input.GetButton("Crouch") && !running)
             {
                 height = Mathf.Lerp(height, crouchedHeight, .5f);
                 m_CharacterController.height = height;
@@ -107,7 +107,7 @@ public class Controller : MonoBehaviour
                 m_CharacterController.height = height;
             }
 
-            if (Input.GetKey(KeyCode.Mouse1))
+            if (Input.GetButton("Fire2"))
             {
                 MainCamera.fieldOfView = Mathf.Lerp(MainCamera.fieldOfView, 20, .5f);
             }

@@ -18,18 +18,18 @@ public class RaycastInteract : MonoBehaviour
             {
                 raycastedObj = hit.collider.gameObject;
 
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetButtonDown("Fire1"))
                 {
                     raycastedObj.GetComponent<InteractableObject>().Interaction();
                 }
-                if (Input.GetKey(KeyCode.Mouse0))
+                if (Input.GetButton("Fire1"))
                 {
                     raycastedObj.GetComponent<InteractableObject>().InteractionHold();
                 }
                 raycastedObj.GetComponent<InteractableObject>().Highlight();
             }
         }
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (Input.GetButtonUp("Fire1"))
         {
             foreach(Holdable h in FindObjectsOfType<Holdable>())
             {
