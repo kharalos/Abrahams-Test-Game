@@ -18,7 +18,8 @@ public class Controller : MonoBehaviour
     public float PlayerSpeed = 5.0f;
     public float RunningSpeed = 7.0f;
     public float JumpSpeed = 5.0f;
-    
+    public float mass = 70f;
+
     float m_VerticalSpeed = 0.0f;
     bool m_IsPaused = false;
     
@@ -64,6 +65,14 @@ public class Controller : MonoBehaviour
         m_HorizontalAngle = transform.localEulerAngles.y;
 
         defaultPosY = MainCamera.transform.localPosition.y;
+    }
+
+    Vector3 impact = Vector3.zero;
+    public void PushBack(Vector3 pos, float forcePower)
+    {
+        Vector3 dir = (pos - transform.position).normalized;
+        if (dir.y < 0) dir.y = -dir.y;
+        impact += dir.normalized * forcePower / mass;
     }
 
     void Update()
@@ -170,11 +179,10 @@ public class Controller : MonoBehaviour
             Speed = move.magnitude / (PlayerSpeed * Time.deltaTime);
 
 
-
             //Bob Head
             if ((Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f) && m_Grounded)
             {
-                if (!footSource.isPlaying)
+                if (!footSource.isPlaying && MainCamera.transform.localPosition.y < -0.05f)
                 {
                     footSource.PlayOneShot(clips[0], m_CharacterController.velocity.magnitude/5f);
                 }
