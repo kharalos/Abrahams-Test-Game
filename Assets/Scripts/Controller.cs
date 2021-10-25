@@ -75,7 +75,8 @@ public class Controller : MonoBehaviour
             m_GroundedTimer = 0.0f;
             m_Grounded = true;
         }
-
+        if (m_IsPaused) LockControl = true;
+        else LockControl = false;
         Speed = 0;
         Vector3 move = Vector3.zero;
         if (!LockControl)

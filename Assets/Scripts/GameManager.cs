@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     {
         controller = FindObjectOfType<Controller>();
         controller.DisplayCursor(false);
+        Time.timeScale = 1f;
     }
 
     // Update is called once per frame
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
             controller.DisplayCursor(true);
             paused = true;
             Debug.Log("Paused");
+            Time.timeScale = 0f;
             //Enable Pause Menu
         }
         else if(Input.GetButtonDown("Pause") && paused)
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
             controller.DisplayCursor(false);
             paused = false;
             Debug.Log("Unpaused");
+            Time.timeScale = 1f;
             //Disable Pause Menu
         }
     }
