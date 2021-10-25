@@ -20,12 +20,14 @@ public class GameManager : MonoBehaviour
         {
             controller.DisplayCursor(true);
             paused = true;
+            Debug.Log("Paused");
             //Enable Pause Menu
         }
-        if(Input.GetButtonDown("Pause") && paused)
+        else if(Input.GetButtonDown("Pause") && paused)
         {
             controller.DisplayCursor(false);
             paused = false;
+            Debug.Log("Unpaused");
             //Disable Pause Menu
         }
     }
