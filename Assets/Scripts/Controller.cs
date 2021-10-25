@@ -10,7 +10,9 @@ public class Controller : MonoBehaviour
     public static Controller Instance { get; protected set; }
     public Camera MainCamera;
     public Transform CameraPosition;
-        
+    public AudioSource footSource;
+    public AudioClip[] clips;
+
     [Header("Control Settings")]
     public float MouseSensitivity = 100.0f;
     public float PlayerSpeed = 5.0f;
@@ -27,12 +29,21 @@ public class Controller : MonoBehaviour
 
     public bool Grounded => m_Grounded;
 
+
     CharacterController m_CharacterController;
 
     bool m_Grounded;
     float m_GroundedTimer;
     float m_SpeedAtJump = 0.0f;
     float oldHeight;
+
+    [Header("Head Bobbing Settings")]
+    public float walkingBobbingSpeed = 14f;
+    public float bobbingAmount = 0.05f;
+
+    float defaultPosY = 0;
+    float timer = 0;
+
     void Awake()
     {
         Instance = this;
@@ -51,6 +62,8 @@ public class Controller : MonoBehaviour
 
         m_VerticalAngle = 0.0f;
         m_HorizontalAngle = transform.localEulerAngles.y;
+
+        defaultPosY = MainCamera.transform.localPosition.y;
     }
 
     void Update()
@@ -84,6 +97,7 @@ public class Controller : MonoBehaviour
             // Jump (we do it first as 
             if (m_Grounded && Input.GetButtonDown("Jump"))
             {
+                footSource.PlayOneShot(clips[1],0.5f);
                 m_VerticalSpeed = JumpSpeed;
                 m_Grounded = false;
                 loosedGrounding = true;
@@ -154,6 +168,27 @@ public class Controller : MonoBehaviour
             CameraPosition.transform.localEulerAngles = currentAngles;
   
             Speed = move.magnitude / (PlayerSpeed * Time.deltaTime);
+
+
+
+            //Bob Head
+            if ((Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f) && m_Grounded)
+            {
+                if (!footSource.isPlaying)
+                {
+                    footSource.PlayOneShot(clips[0], m_CharacterController.velocity.magnitude/5f);
+                }
+
+                //Player is moving
+                timer += Time.deltaTime * walkingBobbingSpeed;
+                MainCamera.transform.localPosition = new Vector3(MainCamera.transform.localPosition.x, defaultPosY + Mathf.Sin(timer) * bobbingAmount, MainCamera.transform.localPosition.z);
+            }
+            else
+            {
+                //Idle
+                timer = 0;
+                MainCamera.transform.localPosition = new Vector3(MainCamera.transform.localPosition.x, Mathf.Lerp(MainCamera.transform.localPosition.y, defaultPosY, Time.deltaTime * walkingBobbingSpeed), MainCamera.transform.localPosition.z);
+            }
         }
 
         // Fall down / gravity
@@ -164,6 +199,15 @@ public class Controller : MonoBehaviour
         var flag = m_CharacterController.Move(verticalMove);
         if ((flag & CollisionFlags.Below) != 0)
             m_VerticalSpeed = 0;
+    }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.gameObject.tag == "Land" && !m_Grounded)
+        {
+            float volume = m_CharacterController.velocity.y * 0.075f;
+            if (m_CharacterController.velocity.y  == 0) volume = 0.2f;
+            footSource.PlayOneShot(clips[2], volume);
+        }
     }
 
     public void DisplayCursor(bool display)

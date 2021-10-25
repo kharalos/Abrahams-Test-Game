@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interactable
+  - Land
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Land
   - Water
   - UI
   - 
