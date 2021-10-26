@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 public class PharaohController : MonoBehaviour
 {
-    bool activated;
+    bool activated,pursuing;
     NavMeshAgent agent;
     Animator anim;
     GameObject player;
@@ -43,16 +43,21 @@ public class PharaohController : MonoBehaviour
     }
     void Update()
     {
-        if (activated && (player.transform.position - transform.position).magnitude < 20f)
+        if (activated && (player.transform.position - transform.position).magnitude < 40f)
         {
             agent.SetDestination(player.transform.position);
+            pursuing = true;
         }
-        else if (activated) agent.SetDestination(startpos);
+        else if (activated) { agent.SetDestination(startpos); pursuing = false; }
         if (activated && (player.transform.position - transform.position).magnitude < 3f)
         {
             anim.SetTrigger("attack");
         }
         else anim.ResetTrigger("attack");
         anim.SetFloat("velocity", agent.velocity.magnitude / agent.speed);
+        if (!headSource.isPlaying && activated) {
+            if (pursuing) headSource.PlayOneShot(clips[2]);
+            else headSource.PlayOneShot(clips[3]); 
+        }
     }
 }
