@@ -3651,117 +3651,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142765200f038484888440c049100b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1640121222
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 58
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_Name
-      value: Pharaoh
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866666021909216657, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 74b08b3bfc9f38d4a9aa00e4209adde0, type: 2}
-    - target: {fileID: 5866666021909216657, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
---- !u!1 &1640121223 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d9d9cfc0fd50bd74781ba71cabbf07b1, type: 3}
-  m_PrefabInstance: {fileID: 1640121222}
-  m_PrefabAsset: {fileID: 0}
---- !u!195 &1640121224
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640121223}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 2.5
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &1640121227
+--- !u!114 &1640121227 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1149019239871887992, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+  m_PrefabInstance: {fileID: 1149019240421226995}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640121223}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88f79b4dfb3aaf14383367430ec059c3, type: 3}
@@ -4434,6 +4329,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28028663156304924}
   m_Mesh: {fileID: -2228417370725966487, guid: 500347c065c35fe448e3e77c13117541, type: 3}
+--- !u!1001 &1149019240421226995
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 230610713384191780, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_Name
+      value: Pharaoh
+      objectReference: {fileID: 0}
+    - target: {fileID: 610408810776518046, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 610408810776518046, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 610408810776518046, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 610408810776518046, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 610408810776518046, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 610408810776518046, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 610408810776518046, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 610408810776518046, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 610408810776518046, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 610408810776518046, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 610408810776518046, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a8804a0c2fc2ff4caf5457e36da145f, type: 3}
 --- !u!4 &1951673686884531385
 Transform:
   m_ObjectHideFlags: 0
@@ -4747,10 +4699,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6500385af265ca54cb83b661f15c3a59, type: 3}
   - {fileID: 8300000, guid: 54b9be821cd0ecd46bb47b62c0a7c96a, type: 3}
   - {fileID: 8300000, guid: 2d33df73561bf994fbbf869219cda961, type: 3}
+  - {fileID: 8300000, guid: 65b919a2f563f1948a48daf79100b263, type: 3}
   MouseSensitivity: 1
   PlayerSpeed: 5
   RunningSpeed: 7
   JumpSpeed: 3
+  mass: 70
   walkingBobbingSpeed: 10
   bobbingAmount: 0.1
 --- !u!1 &6280317334050797646

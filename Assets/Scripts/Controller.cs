@@ -73,6 +73,7 @@ public class Controller : MonoBehaviour
         Vector3 dir = (pos - transform.position).normalized;
         if (dir.y < 0) dir.y = -dir.y;
         impact += dir.normalized * forcePower / mass;
+        Debug.Log("Attacked.");
     }
 
     void Update()
@@ -179,6 +180,10 @@ public class Controller : MonoBehaviour
             Speed = move.magnitude / (PlayerSpeed * Time.deltaTime);
 
 
+            float actualBobSpeed;
+            if (Input.GetButton("Run")) actualBobSpeed = walkingBobbingSpeed * (RunningSpeed/PlayerSpeed);
+            else actualBobSpeed = walkingBobbingSpeed;
+
             //Bob Head
             if ((Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f) && m_Grounded)
             {
@@ -188,7 +193,7 @@ public class Controller : MonoBehaviour
                 }
 
                 //Player is moving
-                timer += Time.deltaTime * walkingBobbingSpeed;
+                timer += Time.deltaTime * actualBobSpeed;
                 MainCamera.transform.localPosition = new Vector3(MainCamera.transform.localPosition.x, defaultPosY + Mathf.Sin(timer) * bobbingAmount, MainCamera.transform.localPosition.z);
             }
             else
