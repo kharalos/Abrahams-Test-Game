@@ -9,9 +9,12 @@ public class PharaohController : MonoBehaviour
     Animator anim;
     GameObject player;
     Vector3 startpos;
+    public AudioSource headSource, handSource, feetSource;
+    public AudioClip[] clips;
     public void Activate()
     {
         anim.SetTrigger("enrage");
+        headSource.PlayOneShot(clips[1]);
     }
     void Move()
     {
@@ -27,14 +30,20 @@ public class PharaohController : MonoBehaviour
     }
     void Strike()
     {
+        handSource.PlayOneShot(clips[5]);
         if ((player.transform.position - transform.position).magnitude < 2.5f)
         {
-            FindObjectOfType<Controller>().PushBack(transform.position, 100f);
+            FindObjectOfType<Controller>().PushBack(transform.position, 9); //Method divides the force by 10 so 10 means 20 meter, 1 is 2m and 100 is 200m
+            headSource.PlayOneShot(clips[4]);
         }
+    }
+    void Step()
+    {
+        feetSource.PlayOneShot(clips[0]);
     }
     void Update()
     {
-        if (activated && (player.transform.position - transform.position).magnitude < 15f)
+        if (activated && (player.transform.position - transform.position).magnitude < 20f)
         {
             agent.SetDestination(player.transform.position);
         }

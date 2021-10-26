@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -29,7 +29,7 @@ public class Controller : MonoBehaviour
     public bool LockControl { get; set; }
 
     public bool Grounded => m_Grounded;
-
+    int step;
 
     CharacterController m_CharacterController;
 
@@ -67,15 +67,6 @@ public class Controller : MonoBehaviour
         defaultPosY = MainCamera.transform.localPosition.y;
     }
 
-    Vector3 impact = Vector3.zero;
-    public void PushBack(Vector3 pos, float forcePower)
-    {
-        Vector3 dir = (pos - transform.position).normalized;
-        if (dir.y < 0) dir.y = -dir.y;
-        impact += dir.normalized * forcePower / mass;
-        Debug.Log("Attacked.");
-    }
-
     void Update()
     {
         bool wasGrounded = m_Grounded;
@@ -107,7 +98,7 @@ public class Controller : MonoBehaviour
             // Jump (we do it first as 
             if (m_Grounded && Input.GetButtonDown("Jump"))
             {
-                footSource.PlayOneShot(clips[1],0.5f);
+                footSource.PlayOneShot(clips[3],0.5f);
                 m_VerticalSpeed = JumpSpeed;
                 m_Grounded = false;
                 loosedGrounding = true;
@@ -189,7 +180,9 @@ public class Controller : MonoBehaviour
             {
                 if (!footSource.isPlaying && MainCamera.transform.localPosition.y < -0.05f)
                 {
-                    footSource.PlayOneShot(clips[0], m_CharacterController.velocity.magnitude/5f);
+                    step++;
+                    if (step == 2) step = 0;
+                    footSource.PlayOneShot(clips[step], m_CharacterController.velocity.magnitude/5f);
                 }
 
                 //Player is moving
@@ -213,6 +206,25 @@ public class Controller : MonoBehaviour
         if ((flag & CollisionFlags.Below) != 0)
             m_VerticalSpeed = 0;
     }
+
+    public void PushBack(Vector3 pos, float forcePower)
+    {
+        forcePower /= 10;
+        Vector3 dir = (transform.position - pos);
+        dir.y = 0;
+        dir.Normalize();
+        Debug.Log("Attacked.");
+        StartCoroutine(Push(dir,forcePower));
+    }
+    private IEnumerator Push(Vector3 dir, float force)
+    {
+        for(int i = 0; i < 20; i++)
+        {
+            m_CharacterController.Move(dir * force);
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if(hit.gameObject.tag == "Land" && !m_Grounded)
