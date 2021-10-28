@@ -10,7 +10,7 @@ public class PharaohTrigger : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            seraphHierarchy.SetActive(false);
+            if(seraphHierarchy) seraphHierarchy.SetActive(false);
             pc.Activate();
             Destroy(gameObject);
         }

@@ -11,10 +11,13 @@ public class PharaohController : MonoBehaviour
     Vector3 startpos;
     public AudioSource headSource, handSource, feetSource;
     public AudioClip[] clips;
+    public GameObject light1, light2;
     public void Activate()
     {
         anim.SetTrigger("enrage");
         headSource.PlayOneShot(clips[1]);
+        light1.SetActive(true);
+        light2.SetActive(true);
     }
     void Move()
     {
