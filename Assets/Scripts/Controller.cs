@@ -205,6 +205,8 @@ public class Controller : MonoBehaviour
         var flag = m_CharacterController.Move(verticalMove);
         if ((flag & CollisionFlags.Below) != 0)
             m_VerticalSpeed = 0;
+
+        if (m_CharacterController.transform.position.y < -10f) FindObjectOfType<GameManager>().Death();
     }
 
     public void PushBack(Vector3 pos, float forcePower)

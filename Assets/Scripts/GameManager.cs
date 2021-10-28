@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     Controller controller;
     bool paused;
+    public GameObject pausePanel, deathPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,19 +21,40 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Pause") && !paused)
         {
-            controller.DisplayCursor(true);
-            paused = true;
-            Debug.Log("Paused");
-            Time.timeScale = 0f;
-            //Enable Pause Menu
+            Pause();
+            pausePanel.SetActive(true);
         }
-        else if(Input.GetButtonDown("Pause") && paused)
+        else if(Input.GetButtonDown("Pause") && paused && pausePanel.activeInHierarchy)
         {
-            controller.DisplayCursor(false);
-            paused = false;
-            Debug.Log("Unpaused");
-            Time.timeScale = 1f;
-            //Disable Pause Menu
+            ReturnToGame();
         }
+    }
+    public void ReturnToGame()
+    {
+        pausePanel.SetActive(false);
+        Unpause();
+    }
+    private void Pause()
+    {
+        controller.DisplayCursor(true);
+        paused = true;
+        Debug.Log("Paused");
+        Time.timeScale = 0f;
+    }
+    private void Unpause()
+    {
+        controller.DisplayCursor(false);
+        paused = false;
+        Debug.Log("Unpaused");
+        Time.timeScale = 1f;
+    }
+    public void Death()
+    {
+        deathPanel.SetActive(true);
+        Pause();
+    }
+    public void ChangeScene(int index)
+    {
+        SceneManager.LoadScene(index);
     }
 }

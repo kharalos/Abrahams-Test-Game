@@ -5,10 +5,12 @@ using UnityEngine;
 public class PharaohTrigger : MonoBehaviour
 {
     public PharaohController pc;
+    public GameObject seraphHierarchy;
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
+            seraphHierarchy.SetActive(false);
             pc.Activate();
             Destroy(gameObject);
         }
