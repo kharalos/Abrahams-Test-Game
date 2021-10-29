@@ -9,6 +9,10 @@ using UnityEditor;
 
 public class MainMenuManager : MonoBehaviour
 {
+    public void ResetLevel()
+    {
+        FindObjectOfType<ProgressionSaver>().ResetAndSaveLevel();
+    }
     public void LoadScene(int sceneID)
     {
         SceneManager.LoadScene(sceneID);

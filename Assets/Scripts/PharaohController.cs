@@ -12,6 +12,7 @@ public class PharaohController : MonoBehaviour
     public AudioSource headSource, handSource, feetSource;
     public AudioClip[] clips;
     public GameObject light1, light2;
+    public float forcePower = 9; //Method divides the force by 10 so 10 means 20 meter, 1 is 2m and 100 is 200m
     public void Activate()
     {
         anim.SetTrigger("enrage");
@@ -36,7 +37,7 @@ public class PharaohController : MonoBehaviour
         handSource.PlayOneShot(clips[5]);
         if ((player.transform.position - transform.position).magnitude < 2.5f)
         {
-            FindObjectOfType<Controller>().PushBack(transform.position, 9); //Method divides the force by 10 so 10 means 20 meter, 1 is 2m and 100 is 200m
+            FindObjectOfType<Controller>().PushBack(transform.position, forcePower); //Method divides the force by 10 so 10 means 20 meter, 1 is 2m and 100 is 200m
             headSource.PlayOneShot(clips[4]);
         }
     }

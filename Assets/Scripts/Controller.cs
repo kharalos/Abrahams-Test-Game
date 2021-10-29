@@ -96,7 +96,7 @@ public class Controller : MonoBehaviour
         if (!LockControl)
         {
             // Jump (we do it first as 
-            if (m_Grounded && Input.GetButtonDown("Jump"))
+            if (m_Grounded && Input.GetButton("Jump"))
             {
                 footSource.PlayOneShot(clips[3],0.5f);
                 m_VerticalSpeed = JumpSpeed;
@@ -225,6 +225,14 @@ public class Controller : MonoBehaviour
             m_CharacterController.Move(dir * force);
             yield return new WaitForSeconds(0.01f);
         }
+    }
+
+    public void SpawnPosition(Vector3 pos)
+    {
+        m_CharacterController = GetComponent<CharacterController>();
+        m_CharacterController.enabled = false;
+        transform.position = pos;
+        m_CharacterController.enabled = true;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)

@@ -8,12 +8,18 @@ public class GameManager : MonoBehaviour
     Controller controller;
     bool paused;
     public GameObject pausePanel, deathPanel;
+    public GameObject[] spawnPos;
     // Start is called before the first frame update
     void Start()
     {
         controller = FindObjectOfType<Controller>();
         controller.DisplayCursor(false);
         Time.timeScale = 1f;
+        if (FindObjectOfType<ProgressionSaver>())
+        {
+            controller.SpawnPosition(spawnPos[ProgressionSaver.Instance.level].transform.position);
+            Debug.Log("Spawned at Level " + ProgressionSaver.Instance.level);
+        }
     }
 
     // Update is called once per frame
