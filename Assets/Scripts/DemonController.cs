@@ -10,6 +10,7 @@ public class DemonController : MonoBehaviour
     Transform target;
     void Start()
     {
+        if (ProgressionSaver.Instance.level > 1) GetComponent<AudioSource>().Stop();
         body = GetComponent<Rigidbody>();
         StartCoroutine(MoveAround(5f));
         target = front2.transform;
