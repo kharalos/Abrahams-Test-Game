@@ -9,6 +9,11 @@ using UnityEditor;
 
 public class MainMenuManager : MonoBehaviour
 {
+    public Button continueButton;
+    private void Start()
+    {
+        if (ProgressionSaver.Instance.level < 2) continueButton.interactable = false;
+    }
     public void ResetLevel()
     {
         FindObjectOfType<ProgressionSaver>().ResetAndSaveLevel();

@@ -30,6 +30,11 @@ public class ProgressionSaver : MonoBehaviour
         level = 1;
         SaveLevel();
     }
+    public void NewLevel(int levelValue)
+    {
+        level = levelValue;
+        SaveLevel();
+    }
     public void SaveLevel()
     {
         SaveData data = new SaveData();
