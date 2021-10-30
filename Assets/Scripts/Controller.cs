@@ -19,9 +19,11 @@ public class Controller : MonoBehaviour
     public float RunningSpeed = 7.0f;
     public float JumpSpeed = 5.0f;
     public float mass = 70f;
+    public float slopeSpeed = 8f;
 
     float m_VerticalSpeed = 0.0f;
     bool m_IsPaused = false;
+    public bool m_Dead = false;
     
     float m_VerticalAngle, m_HorizontalAngle;
     public float Speed { get; private set; } = 0.0f;
@@ -34,6 +36,10 @@ public class Controller : MonoBehaviour
     CharacterController m_CharacterController;
 
     bool m_Grounded;
+    bool m_CanGetUp;
+    bool m_Crounching;
+    bool m_CanSlide = true;
+
     float m_GroundedTimer;
     float m_SpeedAtJump = 0.0f;
     float oldHeight;
@@ -45,6 +51,26 @@ public class Controller : MonoBehaviour
     float defaultPosY = 0;
     float timer = 0;
 
+    //Sliding Parameters
+    private Vector3 hitPointNormal;
+
+    private bool IsSliding
+    {
+        get
+        {
+            Debug.DrawRay(transform.position, Vector3.down*1.5f,Color.red);
+            if (m_CharacterController.isGrounded && Physics.Raycast(transform.position, Vector3.down, out RaycastHit slopeHit, 1.5f))
+            {
+                hitPointNormal = slopeHit.normal;
+                return Vector3.Angle(hitPointNormal, Vector3.up) > m_CharacterController.slopeLimit;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+
     void Awake()
     {
         Instance = this;
@@ -54,7 +80,9 @@ public class Controller : MonoBehaviour
     {     
         m_IsPaused = false;
         m_Grounded = true;
-        
+        m_CanGetUp = true;
+
+
         MainCamera.transform.SetParent(CameraPosition, false);
         MainCamera.transform.localPosition = Vector3.zero;
         MainCamera.transform.localRotation = Quaternion.identity;
@@ -66,6 +94,7 @@ public class Controller : MonoBehaviour
 
         defaultPosY = MainCamera.transform.localPosition.y;
     }
+
 
     void Update()
     {
@@ -89,8 +118,11 @@ public class Controller : MonoBehaviour
             m_GroundedTimer = 0.0f;
             m_Grounded = true;
         }
+
+        // Lock Control if paused
         if (m_IsPaused) LockControl = true;
         else LockControl = false;
+
         Speed = 0;
         Vector3 move = Vector3.zero;
         if (!LockControl)
@@ -107,20 +139,23 @@ public class Controller : MonoBehaviour
 
             
             bool running = Input.GetButton("Run");
+            if (m_Crounching) running = false;
             float actualSpeed = running ? RunningSpeed : PlayerSpeed;
 
             // Crouch movement
             float height = m_CharacterController.height;
             float crouchedHeight = oldHeight / 2;
-            if (Input.GetButton("Crouch") && !running)
+            if (Input.GetButton("Crouch"))
             {
                 height = Mathf.Lerp(height, crouchedHeight, .5f);
                 m_CharacterController.height = height;
+                m_Crounching = true;
             }
-            else
+            else if(m_CanGetUp)
             {
                 height = Mathf.Lerp(height, oldHeight, .5f);
                 m_CharacterController.height = height;
+                m_Crounching = false;
             }
 
             if (Input.GetButton("Fire2"))
@@ -145,10 +180,16 @@ public class Controller : MonoBehaviour
             float usedSpeed = m_Grounded ? actualSpeed : m_SpeedAtJump;
             
             move = move * usedSpeed * Time.deltaTime;
-            
+
             move = transform.TransformDirection(move);
+
+            if (m_CanSlide && IsSliding)
+                move += new Vector3(hitPointNormal.x, -hitPointNormal.y, hitPointNormal.z) * slopeSpeed;
+
             m_CharacterController.Move(move);
-            
+
+
+
             // Turn player
             float turnPlayer =  Input.GetAxis("Mouse X") * MouseSensitivity;
             m_HorizontalAngle = m_HorizontalAngle + turnPlayer;
@@ -172,7 +213,7 @@ public class Controller : MonoBehaviour
 
 
             float actualBobSpeed;
-            if (Input.GetButton("Run")) actualBobSpeed = walkingBobbingSpeed * (RunningSpeed/PlayerSpeed);
+            if (running) actualBobSpeed = walkingBobbingSpeed * (RunningSpeed/PlayerSpeed);
             else actualBobSpeed = walkingBobbingSpeed;
 
             //Bob Head
@@ -199,14 +240,14 @@ public class Controller : MonoBehaviour
 
         // Fall down / gravity
         m_VerticalSpeed = m_VerticalSpeed - 10.0f * Time.deltaTime;
-        if (m_VerticalSpeed < -10.0f)
-            m_VerticalSpeed = -10.0f; // max fall speed
+        /*if (m_VerticalSpeed < -10.0f)
+            m_VerticalSpeed = -10.0f; // max fall speed*/
         var verticalMove = new Vector3(0, m_VerticalSpeed * Time.deltaTime, 0);
         var flag = m_CharacterController.Move(verticalMove);
         if ((flag & CollisionFlags.Below) != 0)
             m_VerticalSpeed = 0;
 
-        if (m_CharacterController.transform.position.y < -10f) FindObjectOfType<GameManager>().Death();
+        if (m_CharacterController.transform.position.y < -20f && !m_Dead) FindObjectOfType<GameManager>().Death();
     }
 
     public void PushBack(Vector3 pos, float forcePower)
@@ -235,14 +276,22 @@ public class Controller : MonoBehaviour
         m_CharacterController.enabled = true;
     }
 
+    bool canLandImpact = true;
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(hit.gameObject.tag == "Land" && !m_Grounded)
+        if(hit.gameObject.tag == "Land" && !m_Grounded && canLandImpact)
         {
             float volume = m_CharacterController.velocity.y * 0.075f;
             if (m_CharacterController.velocity.y  == 0) volume = 0.2f;
             footSource.PlayOneShot(clips[2], volume);
+            StartCoroutine(CheapLandSolution());
         }
+    }
+    IEnumerator CheapLandSolution()
+    {
+        canLandImpact = false;
+        yield return new WaitForSeconds(0.3f);
+        canLandImpact = true;
     }
 
     public void DisplayCursor(bool display)

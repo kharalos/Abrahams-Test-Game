@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
     public void Death()
     {
         deathPanel.SetActive(true);
+        controller.m_Dead = true;
+        Debug.Log("Died");
         Pause();
     }
     public void ChangeScene(int index)
