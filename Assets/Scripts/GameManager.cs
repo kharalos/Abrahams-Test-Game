@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject pausePanel, deathPanel;
     public GameObject[] spawnPos;
     public GameObject level5;
+    public bool hasKnife;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,5 +70,13 @@ public class GameManager : MonoBehaviour
     public void ChangeScene(int index)
     {
         SceneManager.LoadScene(index);
+    }
+    public void BadEnding()
+    {
+        SceneManager.LoadScene(6);
+    }
+    public void GoodEnding()
+    {
+        SceneManager.LoadScene(4);
     }
 }

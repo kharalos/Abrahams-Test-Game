@@ -5,23 +5,30 @@ using UnityEngine;
 public class LightChangeTrigger : MonoBehaviour
 {
     public LightChangeTrigger otherTrigger;
-    public Controller controller;
-    public bool entered;
+    public Light fener;
+    public bool lightsOut;
     public bool first;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            entered = true;
-            if (otherTrigger.first) LightsOut();
+            if (otherTrigger.first && !lightsOut) StartCoroutine(LightsOut());
+            if (first) LightsBack();
         }
     }
-    void LightsOut()
+    IEnumerator LightsOut()
     {
-
+        lightsOut = true;
+        for (float i = 10; i > 0; i -= 0.1f)
+        {
+            yield return new WaitForSeconds(0.05f);
+            fener.intensity = i;
+        }
+        fener.intensity = 0;
     }
     void LightsBack()
     {
-
+        fener.intensity = 10;
+        lightsOut = false;
     }
 }

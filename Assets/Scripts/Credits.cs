@@ -15,6 +15,12 @@ public class Credits : MonoBehaviour
     {
         warningDisplay.alpha = 0f;
         StartCoroutine(AlphaChanger(5f));
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        if (FindObjectOfType<MusicManager>())
+        {
+            Destroy(MusicManager.Instance.gameObject);
+        }
     }
     int queue = 0;
     IEnumerator AlphaChanger(float time)
