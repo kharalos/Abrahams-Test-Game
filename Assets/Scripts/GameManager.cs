@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     bool paused;
     public GameObject pausePanel, deathPanel;
     public GameObject[] spawnPos;
+    public GameObject level5;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,10 @@ public class GameManager : MonoBehaviour
         {
             controller.SpawnPosition(spawnPos[ProgressionSaver.Instance.level].transform.position);
             Debug.Log("Spawned at Level " + ProgressionSaver.Instance.level);
+            if(ProgressionSaver.Instance.level == 5)
+            {
+                level5.SetActive(true);
+            }
         }
     }
 

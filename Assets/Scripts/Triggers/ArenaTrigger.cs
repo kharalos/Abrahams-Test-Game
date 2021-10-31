@@ -16,9 +16,9 @@ public class ArenaTrigger : MonoBehaviour
     }
     IEnumerator EnteredArena()
     {
-        yield return new WaitForSeconds(14f);
+        yield return new WaitForSeconds(15f);
         seraph.SetActive(true);
-        FindObjectOfType<SubtitleManager>().AddSubtitles("<color=yellow>Come Abraham, fire won't harm you.</color>", 30f, true);
+        FindObjectOfType<SubtitleManager>().AddSubtitles("<color=yellow>Come Abraham, fire won't harm you.</color>", 30f, false);
         Destroy(gameObject);
     }
 }
