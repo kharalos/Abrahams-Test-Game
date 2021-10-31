@@ -8,7 +8,7 @@ public class KnifeInteractable : InteractableObject
     public override void Interaction()
     {
         base.Interaction();
-        if (GetComponent<Knife>().active)
+        if (!GetComponent<Knife>().active)
         {
             GetComponent<Knife>().Activate();
             StartCoroutine(LerpPhysics());
@@ -16,7 +16,7 @@ public class KnifeInteractable : InteractableObject
     }
     IEnumerator LerpPhysics()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 50; i++)
         {
             yield return new WaitForSeconds(0.01f);
             transform.position = Vector3.Lerp(transform.position, targetPos.transform.position, 0.5f);

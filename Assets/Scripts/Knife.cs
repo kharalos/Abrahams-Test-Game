@@ -20,7 +20,7 @@ public class Knife : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetButtonUp("Fire1") && active)
+        if (Input.GetButtonDown("Fire1") && active)
         {
             anim.SetTrigger("Stab");
         }
@@ -38,22 +38,27 @@ public class Knife : MonoBehaviour
             anim.speed = 0;
             anim.SetTrigger("Interrupt");
             anim.ResetTrigger("Stab");
+            active = false;
         }
+        else source.PlayOneShot(clips[1]);
     }
     public void RegainControl()
     {
         anim.speed = 1;
+        active = true;
     }
     void Stab()
     {
-        source.PlayOneShot(clips[1]);
+
         if(situations == 2)
         {
             gm.GoodEnding();
+            source.PlayOneShot(clips[3]);
         }
         if(situations == 3)
         {
             gm.BadEnding();
+            source.PlayOneShot(clips[3]);
         }
         situations = 0;
     }

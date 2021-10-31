@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 2454460095491196920}
   - component: {fileID: 313038322807565601}
   - component: {fileID: 2268737632197271321}
-  - component: {fileID: 4140869636907651953}
   - component: {fileID: 2454460095491196919}
+  - component: {fileID: 4140869636907651953}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Interactable
@@ -127,7 +127,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 74dbe8b1892836b46abe63c5b935a733, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -229,19 +229,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4140869636907651953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352483373029691433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf7c4ba386ab2d54389c3b35a3e79978, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPos: {fileID: 0}
 --- !u!114 &2454460095491196919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,5 +242,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: c77076c612ec7b64da7e282c5af221b9, type: 3}
+  - {fileID: 8300000, guid: b6e83f6e78068c846b3005ab985fa2aa, type: 3}
+  - {fileID: 8300000, guid: e8dec0083a43bda4692fa947fba3f395, type: 3}
   situations: 0
+--- !u!114 &4140869636907651953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352483373029691433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7c4ba386ab2d54389c3b35a3e79978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPos: {fileID: 0}
