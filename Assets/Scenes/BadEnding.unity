@@ -303,7 +303,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   warningDisplay: {fileID: 1529764960}
-  introText: <color=red>What the fuck did you do? What is wrong with you?</color>
+  introText: <color=red>What the fuck did you do?               What is wrong with
+    you?</color>
 --- !u!1 &1201786853
 GameObject:
   m_ObjectHideFlags: 0

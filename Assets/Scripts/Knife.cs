@@ -11,6 +11,8 @@ public class Knife : MonoBehaviour
     public AudioClip[] clips;
     AudioSource source;
     public int situations;
+    public Situation ishmael;
+    public GameObject seraph;
     private void Start()
     {
         gm = FindObjectOfType<GameManager>();
@@ -39,12 +41,22 @@ public class Knife : MonoBehaviour
             anim.SetTrigger("Interrupt");
             anim.ResetTrigger("Stab");
             active = false;
+            ishmael.situationID = 0;
+            situations = 0;
+            seraph.SetActive(true);
+            StartCoroutine(RegainControl());
         }
         else source.PlayOneShot(clips[1]);
     }
-    public void RegainControl()
+    IEnumerator RegainControl()
     {
+        FindObjectOfType<SubtitleManager>().AddSubtitles("<color=red>Stop!</color>", 1f, true);
+        FindObjectOfType<SubtitleManager>().AddSubtitles("<color=yellow>Your lord has granted you this sheep to sacrifice instead.</color>", 3f, false);
+        FindObjectOfType<SubtitleManager>().AddSubtitles("<color=green>You passed the test Abraham.</color>", 2f, false);
+        yield return new WaitForSeconds(2f);
+        ishmael.situationID = 3;
         anim.speed = 1;
+
         active = true;
     }
     void Stab()
@@ -52,13 +64,13 @@ public class Knife : MonoBehaviour
 
         if(situations == 2)
         {
+            source.PlayOneShot(clips[2]);
             gm.GoodEnding();
-            source.PlayOneShot(clips[3]);
         }
         if(situations == 3)
         {
+            source.PlayOneShot(clips[2]);
             gm.BadEnding();
-            source.PlayOneShot(clips[3]);
         }
         situations = 0;
     }

@@ -9,5 +9,4 @@ public class Situation : InteractableObject
     {
         FindObjectOfType<Knife>().ChangeSituation(situationID);
     }
-
 }
