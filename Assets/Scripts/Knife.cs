@@ -57,7 +57,7 @@ public class Knife : MonoBehaviour
         ishmael.situationID = 3;
         anim.speed = 1;
 
-        active = true;
+             active = true;
     }
     void Stab()
     {
