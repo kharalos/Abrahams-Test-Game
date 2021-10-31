@@ -10,7 +10,7 @@ public class PharaohTrigger : MonoBehaviour
         if(other.tag == "Player")
         {
             pc.Activate();
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 }

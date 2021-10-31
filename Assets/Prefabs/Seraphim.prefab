@@ -2450,6 +2450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6480829869164ac4c8c3b41481561124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!1 &1892708732942436672
 GameObject:
   m_ObjectHideFlags: 0
@@ -12788,6 +12789,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2335978215343427093, guid: 10c31a730620b4c4d80f5c1cf268d4bd, type: 3}
+      propertyPath: m_Flip.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2335978215343427115, guid: 10c31a730620b4c4d80f5c1cf268d4bd, type: 3}
       propertyPath: m_Name
       value: Particle System (1)
@@ -12849,6 +12854,10 @@ PrefabInstance:
     - target: {fileID: 2335978215343427092, guid: 10c31a730620b4c4d80f5c1cf268d4bd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2335978215343427093, guid: 10c31a730620b4c4d80f5c1cf268d4bd, type: 3}
+      propertyPath: m_Flip.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2335978215343427115, guid: 10c31a730620b4c4d80f5c1cf268d4bd, type: 3}
       propertyPath: m_Name
