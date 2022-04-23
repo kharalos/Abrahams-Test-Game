@@ -10,12 +10,12 @@ public class KnifeInteractable : InteractableObject
         base.Interaction();
         if (!GetComponent<Knife>().active)
         {
-            GetComponent<Knife>().Activate();
             StartCoroutine(LerpPhysics());
         }
     }
     IEnumerator LerpPhysics()
     {
+        GetComponent<Knife>().PlayGrabSound();
         for (int i = 0; i < 50; i++)
         {
             yield return new WaitForSeconds(0.01f);
@@ -26,6 +26,7 @@ public class KnifeInteractable : InteractableObject
         transform.rotation = targetPos.transform.rotation;
         gameObject.transform.SetParent(targetPos.transform.parent);
         GetComponent<BoxCollider>().enabled = false;
+        GetComponent<Knife>().Activate();
         Destroy(this);
     }
 

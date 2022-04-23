@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     Controller controller;
@@ -45,6 +46,10 @@ public class GameManager : MonoBehaviour
     {
         pausePanel.SetActive(false);
         Unpause();
+    }
+    public void ChaneMouseSensitivity(float value)
+    {
+        controller.MouseSensitivity = value;
     }
     private void Pause()
     {

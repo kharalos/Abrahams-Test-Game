@@ -31,6 +31,9 @@ public class Knife : MonoBehaviour
     {
         gm.hasKnife = true;
         active = true;
+    }
+    public void PlayGrabSound()
+    {
         source.PlayOneShot(clips[0]);
     }
     void KnifeHigh()
